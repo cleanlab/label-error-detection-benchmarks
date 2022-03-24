@@ -50,6 +50,12 @@ def cross_val_predict_autogluon_image_dataset(
     test_index_labels : np.array
       Labels from all test splits in cross-validation procedure.
 
+    skf_splits : list
+      Train/test splits from cross-validation procedure
+
+    cv_models : list
+      Models from cross-validation procedure (K models for K-folds cross-validation)
+
     """
 
     # stratified K-folds
@@ -64,6 +70,9 @@ def cross_val_predict_autogluon_image_dataset(
     test_index_pred_features = []
     test_index_images = []  # image file paths
     test_index_labels = []  # image labels
+
+    # save models from each split
+    cv_models = []
 
     # run cross-validation
     for split_num, split in enumerate(skf_splits):
@@ -108,6 +117,9 @@ def cross_val_predict_autogluon_image_dataset(
         test_index_images.append(dataset.iloc[test_index].image.values)
         test_index_labels.append(dataset.iloc[test_index].label.values)
 
+        # save model
+        cv_models.append(predictor)
+
     # combine test predictions from all splits
     test_index_pred_probs = np.vstack(test_index_pred_probs)
     test_index_pred_features = np.vstack(test_index_pred_features)
@@ -119,4 +131,6 @@ def cross_val_predict_autogluon_image_dataset(
         test_index_pred_features,
         test_index_images,
         test_index_labels,
+        skf_splits,
+        cv_models,
     )
