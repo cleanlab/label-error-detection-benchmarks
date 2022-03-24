@@ -1,0 +1,5 @@
+*/__init__.py
+*__pycache__
+*/.ipynb*
+data
+temp

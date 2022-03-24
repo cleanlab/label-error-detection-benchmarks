@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+    dcai:
+        tty: true
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        shm_size: "8gb"
+        image: dcai
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: "all" # use all GPU devices on host machine
+                          capabilities: [ gpu ]
+        entrypoint: bash
+        ports:
+            - "8888:8888"
+        volumes:
+            - .:/dcai
+
+            # TODO: remove below before publishing repo
+            - /home/johnson/Data:/Data # data on M.2 SSD; super fast read for training workloads      
+
+            # Cloned repos
+            - /media/johnson/johnson-hdd-11/cleanlab/open-source/cleanlab:/cleanlab
+            - /media/johnson/johnson-hdd-11/cleanlab/open-source/examples:/cleanlab-examples
+            - /media/johnson/johnson-hdd-11/cleanlab/open-source/confidentlearning-reproduce:/confidentlearning-reproduce
