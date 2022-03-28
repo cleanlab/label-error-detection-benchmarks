@@ -1,5 +1,9 @@
 */__init__.py
 *__pycache__
 */.ipynb*
+.ipynb_checkpoints
+*temp*.ipynb
+*.pickle
+*split*
 data
 temp
