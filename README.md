@@ -8,9 +8,9 @@ Old repo for label error detection benchmark: [https://github.com/JohnsonKuan/dc
 
 ## Datasets
 
-*Andrew Ng 2021 DCAI Competition Dataset of Roman Numeral Images*
+**Andrew Ng 2021 DCAI Competition Dataset of Roman Numeral Images**
 
-*CIFAR-10*
+**CIFAR-10**
 
 (Link with instructions to download CIFAR-10 PNG)[https://github.com/knjcode/cifar2png]
 
