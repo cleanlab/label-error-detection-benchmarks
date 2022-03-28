@@ -14,8 +14,9 @@ Old repo for label error detection benchmark: [https://github.com/JohnsonKuan/dc
 
 **CIFAR-10**
 
-* [Link with instructions to download CIFAR-10 PNG](https://github.com/knjcode/cifar2png)
+* Label errors are generated with synthetic noise
+    see notebook: "src/experiments/cifar10/0_Generate_Noisy_Labels.ipynb"
 
-* Label errors are generated with synthetic noise (see notebook: "src/experiments/cifar10/0_Generate_Noisy_Labels.ipynb")
+* [Link with instructions to download CIFAR-10 PNG](https://github.com/knjcode/cifar2png)
 
 * [Link to spreadsheet with results](https://docs.google.com/spreadsheets/d/1EU9cMlIKOy_SGKu-5AvbcZPmpXjKc4p7-l1RQKKPsYU/edit?usp=sharing)
