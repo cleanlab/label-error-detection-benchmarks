@@ -3,6 +3,7 @@
 */.ipynb*
 .ipynb_checkpoints
 *temp*.ipynb
+*.csv
 *.pickle
 *split*
 data
