@@ -122,6 +122,9 @@ def cross_val_predict_autogluon_image_dataset(
             )
             _save_to_pickle(test_index, get_pickle_file_name("test_indices"))
 
+        # save model trained on this split
+        predictor.save(f"{out_subfolder}predictor.ag")
+
     return None
 
 
