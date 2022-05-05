@@ -1,3 +1,3 @@
-# Label Quality Scoring Benchmarks
+# Label Error Detection Benchmarks
 
 Under construction
