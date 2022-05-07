@@ -17,8 +17,6 @@ Download file: `Food-101N_release.zip`
 Training dataset: `./Food-101N_release/train`
 Verified training labels (subset of training dataset): `./Food-101N_release/meta/verified_train.tsv`
 
----
-
 #### **Cifar-10n**
 
 Link to download dataset: https://github.com/UCSC-REAL/cifar-10-100n
