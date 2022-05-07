@@ -55,6 +55,12 @@ Each dataset will have its own folder in `./src/eperiments` with a notebook to:
 
 ## Evaluate Label Quality Scores
 
+All pre-computed predicted probabilities are available in the `/src/experiments` folder except for Food-101n (due to large file size.)
+
+For Food-101n, download the pred_probs in link below:
+
+https://drive.google.com/file/d/1DV45bpazRIeLGV_wJD7fDuz4AzuVzhq9/view?usp=sharing
+
 Once we have the out-of-sample predicted probabilities for all datasets and models, we can evaluate them with a single notebook located below:
 
 `src/experiments/Evaluate_All_Experiments.ipynb`
