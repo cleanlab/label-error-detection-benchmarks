@@ -2,7 +2,7 @@
 
 This repo contains code to reproduce results in the paper "Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors" (TODO: insert link).
 
-## Dataset Download Instructions
+## Download Data
 
 #### **roman-numeral**
 
@@ -23,7 +23,7 @@ Link to download dataset: https://github.com/UCSC-REAL/cifar-10-100n
 
 See link for details on this dataset: http://ucsc-real.soe.ucsc.edu:1995/Home.html
 
-## Instructions to run cross-validation for each dataset to generate predicted probabilities
+## (Optional) Run cross-validation for each dataset to generate predicted probabilities
 
 Running cross-validation is optional because we've conveniently provided pre-computed out-of-sample predicted probabilities for each dataset and model.
 
@@ -52,3 +52,9 @@ Each dataset will have its own folder in `./src/eperiments` with a notebook to:
 
 1. `1_Run_Cross_Val_Noisy_Labels.ipynb`: for each model, run k-fold cross-validation with noisy labels to generated out-of-sample predicted probabilities
 2. `2_Save_Cross_Val_Results_To_Numpy.ipynb`: for each model, save predicted probabilities to a Numpy file
+
+## Evaluate Label Quality Scores
+
+Once we have the out-of-sample predicted probabilities for all datasets and models, we can evaluate them with a single notebook located below:
+
+`src/experiments/Evaluate_All_Experiments.ipynb`
