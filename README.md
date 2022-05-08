@@ -2,6 +2,9 @@
 
 This repo contains code to reproduce results in the paper "Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors" (TODO: insert link).
 
+Full detail of results can be found here:
+https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing
+
 ## Download Data
 
 #### **roman-numeral**
