@@ -4,13 +4,13 @@ This repo contains code to reproduce results in the paper "Model-Agnostic Label 
 
 Full detail of results can be found [here](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
 
-## Datasets
+## Download Datasets
 
-|     | Dataset                                                                             | Links                                                                                                                                                                                                                                                                           |
-| --- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | [roman-numeral](roman-numeral)                                                      | Dataset: [Codalab](https://worksheets.codalab.org/bundles/0x497f5d7096724783aa1eb78b85aa321f)<br />Verified Labels: [andrew-ng-dcai-comp-2021-manual-review-for-label-errors.xlsx](andrew-ng-dcai-comp-2021-manual-review-for-label-errors.xlsx)                                |
-| 2   | [food-101n](food-101n)                                                              | Dataset and Verified Labels: https://kuanghuei.github.io/Food-101N/ <br />Download file: `Food-101N_release.zip` <br /> Training dataset: `./Food-101N_release/train`<br />Verified training labels (subset of training dataset): `./Food-101N_release/meta/verified_train.tsv` |
-| 3   | [cifar-10n-worst](cifar-10n-worst) <br/> [cifar-10n-aggregate](cifar-10n-aggregate) | https://github.com/UCSC-REAL/cifar-10-100n <br /> http://ucsc-real.soe.ucsc.edu:1995/Home.html                                                                                                                                                                                  |
+|     | Dataset                                                                                                                                                                                                                                                                 | Links                                                                                                                                                                                                                                                                           |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | [roman-numeral](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/roman-numeral)                                                                                                                                                | Dataset: [Codalab](https://worksheets.codalab.org/bundles/0x497f5d7096724783aa1eb78b85aa321f)<br />Verified Labels: [andrew-ng-dcai-comp-2021-manual-review-for-label-errors.xlsx](andrew-ng-dcai-comp-2021-manual-review-for-label-errors.xlsx)                                |
+| 2   | [food-101n](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/food-101n)                                                                                                                                                        | Dataset and Verified Labels: https://kuanghuei.github.io/Food-101N/ <br />Download file: `Food-101N_release.zip` <br /> Training dataset: `./Food-101N_release/train`<br />Verified training labels (subset of training dataset): `./Food-101N_release/meta/verified_train.tsv` |
+| 3   | [cifar-10n-worst](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-worst) <br/> [cifar-10n-aggregate](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-aggregate) | https://github.com/UCSC-REAL/cifar-10-100n <br /> http://ucsc-real.soe.ucsc.edu:1995/Home.html                                                                                                                                                                                  |
 
 ## (Optional) Run cross-validation for each dataset to generate predicted probabilities
 
@@ -46,10 +46,8 @@ Each dataset will have its own folder in `./src/eperiments` with a notebook to:
 
 All pre-computed predicted probabilities are available in the `/src/experiments` folder except for Food-101n (due to large file size.)
 
-For Food-101n, download the pred_probs in link below:
-
-https://drive.google.com/file/d/1DV45bpazRIeLGV_wJD7fDuz4AzuVzhq9/view?usp=sharing
+For Food-101n, download the pre-computed predicted probabilities (`pred_probs.npy`) [here](https://drive.google.com/file/d/1DV45bpazRIeLGV_wJD7fDuz4AzuVzhq9/view?usp=sharing).
 
 Once we have the out-of-sample predicted probabilities for all datasets and models, we can evaluate them with a single notebook located below:
 
-`src/experiments/Evaluate_All_Experiments.ipynb`
+[src/experiments/Evaluate_All_Experiments.ipynb](https://github.com/JohnsonKuan/label-error-detection-benchmarks/blob/main/src/experiments/Evaluate_All_Experiments.ipynb)
