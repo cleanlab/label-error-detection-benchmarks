@@ -1,8 +1,8 @@
 # Label Error Detection Benchmarks
 
-This repo contains code to reproduce results in the paper "Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors" (TODO: insert link).
+Code to reproduce the results from our paper "Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors".
 
-Full detail of results can be found in [this Google sheet](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
+Raw tables of all performance numbers for each method+dataset can be found in [this Google sheet](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
 
 ## Download Datasets
 
@@ -12,7 +12,7 @@ Full detail of results can be found in [this Google sheet](https://docs.google.c
 | 2   | [food-101n](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/food-101n)                                                                                                                                                   | Dataset and Verified Labels: https://kuanghuei.github.io/Food-101N/ <br /> File: `Food-101N_release.zip` <br /> Training dataset: `./Food-101N_release/train`<br />Verified training labels (subset of training dataset): `./Food-101N_release/meta/verified_train.tsv`                                                                                  |
 | 3   | [cifar-10n-agg](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-aggregate) <br /> [cifar-10n-worst](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-worst) | https://github.com/UCSC-REAL/cifar-10-100n <br /> http://ucsc-real.soe.ucsc.edu:1995/Home.html                                                                                                                                                                                                                                                           |
 
-## (Optional) Run cross-validation for each dataset to generate predicted probabilities
+## (Optional) Run cross-validation for each dataset to train models and generate predicted probabilities
 
 Running cross-validation is optional because we've conveniently provided pre-computed out-of-sample predicted probabilities for each dataset and model.
 
@@ -35,19 +35,18 @@ sudo docker-compose run --rm --service-port dcai
 make jupyter-lab
 ```
 
-#### 3. Run notebook for each dataset
+#### 3. Run training notebooks for each dataset
 
 Each dataset will have its own folder in `./src/eperiments` with a notebook to:
 
-1. `1_Run_Cross_Val_Noisy_Labels.ipynb`: for each model, run k-fold cross-validation with noisy labels to generated out-of-sample predicted probabilities
-2. `2_Save_Cross_Val_Results_To_Numpy.ipynb`: for each model, save predicted probabilities to a Numpy file
+1. `1_Run_Cross_Val_Noisy_Labels.ipynb`: For each model, run k-fold cross-validation with noisy labels to generated out-of-sample predicted probabilities.
+2. `2_Save_Cross_Val_Results_To_Numpy.ipynb`: For each model, save predicted probabilities to a Numpy file.
+
 
 ## Evaluate Label Quality Scores
 
-All pre-computed predicted probabilities are available in the `/src/experiments` folder except for Food-101n (due to large file size.)
+The above step is optional because pre-computed predicted probabilities from all of our models are available for you to utilize in the `/src/experiments` folder (except for Food-101n, due to large file size). For Food-101n, download the pre-computed predicted probabilities (`pred_probs.npy`) [here](https://drive.google.com/file/d/1DV45bpazRIeLGV_wJD7fDuz4AzuVzhq9/view?usp=sharing).
 
-For Food-101n, download the pre-computed predicted probabilities (`pred_probs.npy`) [here](https://drive.google.com/file/d/1DV45bpazRIeLGV_wJD7fDuz4AzuVzhq9/view?usp=sharing).
-
-Once we have the out-of-sample predicted probabilities for all datasets and models, we can evaluate them with a single notebook located below:
+Once we have the out-of-sample predicted probabilities for all datasets and models, we evaluate their performance for detecting label errors using the following notebook:
 
 [src/experiments/Evaluate_All_Experiments.ipynb](https://github.com/JohnsonKuan/label-error-detection-benchmarks/blob/main/src/experiments/Evaluate_All_Experiments.ipynb)
