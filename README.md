@@ -13,6 +13,8 @@ Raw tables of all performance numbers for each method+dataset can be found in [t
 | 3   | [cifar-10n-agg](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-aggregate) <br /> [cifar-10n-worst](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10n-worst) | https://github.com/UCSC-REAL/cifar-10-100n <br /> http://ucsc-real.soe.ucsc.edu:1995/Home.html                                                                                                                                                                                                                                                           |
 | 4   | [cifar-10s](https://github.com/JohnsonKuan/label-error-detection-benchmarks/tree/main/src/experiments/cifar-10)                                                                                                                                                    | Dataset: [Download Cifar as PNG files](https://github.com/knjcode/cifar2png)<br /> Noisy Labels: [cifar10_train_dataset_noise_amount_0.2_sparsity_0.4_20220326055753.csv](https://github.com/JohnsonKuan/label-error-detection-benchmarks/blob/main/src/experiments/cifar-10/cifar10_train_dataset_noise_amount_0.2_sparsity_0.4_20220326055753.csv)     |
 
+The roman-numeral dataset contain duplicate images (exact same image with different file names). We use the following script to dedupe: `src/preprocess/remove_dupes.py`
+
 ## (Optional) Run cross-validation for each dataset to train models and generate predicted probabilities
 
 Running cross-validation is optional because we've conveniently provided pre-computed out-of-sample predicted probabilities for each dataset and model.
@@ -42,7 +44,6 @@ Each dataset will have its own folder in `./src/eperiments` with a notebook to:
 
 1. `1_Run_Cross_Val_Noisy_Labels.ipynb`: For each model, run k-fold cross-validation with noisy labels to generated out-of-sample predicted probabilities.
 2. `2_Save_Cross_Val_Results_To_Numpy.ipynb`: For each model, save predicted probabilities to a Numpy file.
-
 
 ## Evaluate Label Quality Scores
 
