@@ -4,7 +4,6 @@ Code to reproduce results from the paper:
 
 **Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors**. *ICML DataPerf Workshop 2022*
 
-Raw tables of all performance numbers for each method+dataset can be found in [this Google sheet](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
 
 ## Download Datasets
 
@@ -54,3 +53,5 @@ The above step is optional because pre-computed predicted probabilities from all
 Once we have the out-of-sample predicted probabilities for all datasets and models, we evaluate their performance for detecting label errors using the following notebook:
 
 [src/experiments/Evaluate_All_Experiments.ipynb](https://github.com/JohnsonKuan/label-error-detection-benchmarks/blob/main/src/experiments/Evaluate_All_Experiments.ipynb)
+
+Raw tables of all performance numbers for each method+dataset can be found in [this Google sheet](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
