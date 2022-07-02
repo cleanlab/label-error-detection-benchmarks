@@ -1,6 +1,8 @@
 # Label Error Detection Benchmarks
 
-Code to reproduce the results from our paper "Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors".
+Code to reproduce results from the paper:
+
+**Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors**. *ICML DataPerf Workshop 2022*
 
 Raw tables of all performance numbers for each method+dataset can be found in [this Google sheet](https://docs.google.com/spreadsheets/d/1EvdeGOtLW7z4C7Edg3FIg0Q-Su_AqtsmRzVv5_uuPO4/edit?usp=sharing).
 
