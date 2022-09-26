@@ -1,4 +1,4 @@
-from cleanlab import noise_generation
+from cleanlab.benchmarking import noise_generation
 import torchvision
 import numpy as np
 from pathlib import Path
