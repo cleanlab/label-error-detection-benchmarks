@@ -3,9 +3,76 @@ import numpy as np
 from autogluon.vision import ImagePredictor, ImageDataset
 from sklearn.model_selection import StratifiedKFold
 from typing import Dict, Tuple
+from pathlib import Path
 import pickle
 import os
 
+
+def train_predict_autogluon(
+    dataset: ImageDataset,
+    classes,
+    out_folder: str = "./cross_val_predict_run/",
+    *,
+    n_splits: int = 5,
+    model_params: Dict = {"epochs": 1, "holdout_frac": 0.2},
+    ngpus_per_trial: int = 1,
+    time_limit: int = 7200,
+    random_state: int = 123,
+):
+    # NO exval
+    
+    train_index = range(len(dataset))
+    test_index = train_index
+    
+    # init model
+    predictor = ImagePredictor(verbosity=0)
+
+    # train model on train indices in this split
+    predictor.fit(
+        train_data=dataset.iloc[train_index],
+        ngpus_per_trial=ngpus_per_trial,
+        hyperparameters=model_params,
+        time_limit=time_limit,
+        random_state=random_state,
+    )
+
+    # predicted probabilities for test split
+    pred_probs = predictor.predict_proba(
+        data=dataset.iloc[test_index], as_pandas=False
+    )
+
+    # predicted features (aka embeddings) for test split
+    # why does autogluon predict_feature return array of array for the features?
+    # need to use stack to convert to 2d array (https://stackoverflow.com/questions/50971123/converty-numpy-array-of-arrays-to-2d-array)
+    pred_features = np.stack(
+        predictor.predict_feature(data=dataset.iloc[test_index], as_pandas=False)[
+            :, 0
+        ]
+    )
+
+    # save model results to np files    
+    print(f"Saving to numpy files in this folder: {out_folder}")
+    
+    try:
+        os.makedirs(out_folder, exist_ok=False)
+    except OSError:
+        print(f"Folder {out_folder} already exists!")
+    finally:
+        np.save(out_folder + "pred_probs", pred_probs)
+        np.save(out_folder + "pred_features", pred_features)
+        np.save(out_folder + "noisy_labels", dataset.iloc[test_index].label.values)
+        np.save(out_folder + "images", dataset.iloc[test_index].image.values)
+        np.save(out_folder + "indices", test_index)
+    
+        # save true labels from original file path
+        label_name_to_idx_map = {v:k for k, v in enumerate(classes)}
+        get_orig_label_idx_from_file_path = np.vectorize(lambda f: label_name_to_idx_map[Path(f).parts[-2]])
+        true_labels = get_orig_label_idx_from_file_path(dataset.iloc[test_index].image.values)
+        np.save(out_folder + "true_labels", true_labels)
+
+        # save model trained on this split
+        predictor.save(f"{out_folder}predictor.ag")
+    
 
 def cross_val_predict_autogluon_image_dataset(
     dataset: ImageDataset,
@@ -16,7 +83,7 @@ def cross_val_predict_autogluon_image_dataset(
     ngpus_per_trial: int = 1,
     time_limit: int = 7200,
     random_state: int = 123,
-) -> Tuple:
+):
     """Run stratified K-folds cross-validation with AutoGluon image model.
 
     Parameters
@@ -77,8 +144,6 @@ def cross_val_predict_autogluon_image_dataset(
             time_limit=time_limit,
             random_state=random_state,
         )
-
-        # predict on test indices in this split
 
         # predicted probabilities for test split
         pred_probs = predictor.predict_proba(
