@@ -24,6 +24,7 @@ def train_predict_autogluon(
     train_index = range(len(dataset))
     test_index = train_index
     
+    print('training...')
     # init model
     predictor = ImagePredictor(verbosity=0)
 
@@ -35,7 +36,7 @@ def train_predict_autogluon(
         time_limit=time_limit,
         random_state=random_state,
     )
-
+    print('predicting...')
     # predicted probabilities for test split
     pred_probs = predictor.predict_proba(
         data=dataset.iloc[test_index], as_pandas=False
@@ -44,11 +45,12 @@ def train_predict_autogluon(
     # predicted features (aka embeddings) for test split
     # why does autogluon predict_feature return array of array for the features?
     # need to use stack to convert to 2d array (https://stackoverflow.com/questions/50971123/converty-numpy-array-of-arrays-to-2d-array)
-    pred_features = np.stack(
-        predictor.predict_feature(data=dataset.iloc[test_index], as_pandas=False)[
-            :, 0
-        ]
-    )
+    
+#     print('stacking features...')
+#     pred_features = predictor.predict_feature(data=dataset.iloc[test_index], as_pandas=False)
+#     print(pred_features.shape)
+#     pred_features = np.stack(pred_features[:, 0])
+#     print(pred_features.shape)
 
     # save model results to np files    
     print(f"Saving to numpy files in this folder: {out_folder}")
@@ -58,18 +60,18 @@ def train_predict_autogluon(
     except OSError:
         print(f"Folder {out_folder} already exists!")
     finally:
+        print('saving pred_probs...')
         np.save(out_folder + "pred_probs", pred_probs)
-        np.save(out_folder + "pred_features", pred_features)
+#         print('saving pred_features...')
+#         np.save(out_folder + "pred_features", pred_features)
+        print('saving noisy_labels...')
         np.save(out_folder + "noisy_labels", dataset.iloc[test_index].label.values)
+        print('saving images...')
         np.save(out_folder + "images", dataset.iloc[test_index].image.values)
+        print('saving indices...')
         np.save(out_folder + "indices", test_index)
-    
-        # save true labels from original file path
-        label_name_to_idx_map = {v:k for k, v in enumerate(classes)}
-        get_orig_label_idx_from_file_path = np.vectorize(lambda f: label_name_to_idx_map[Path(f).parts[-2]])
-        true_labels = get_orig_label_idx_from_file_path(dataset.iloc[test_index].image.values)
-        np.save(out_folder + "true_labels", true_labels)
-
+        
+        print('saving predictor...')
         # save model trained on this split
         predictor.save(f"{out_folder}predictor.ag")
     
