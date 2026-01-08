@@ -2,7 +2,7 @@
 
 Code to reproduce results from the paper:
 
-[**Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors**](https://people.csail.mit.edu/jonasmueller/info/LabelQuality_icml.pdf). *ICML DataPerf Workshop 2022*
+[**Model-Agnostic Label Quality Scoring to Detect Real-World Label Errors**](https://jonasmueller.org/info/LabelQuality_icml.pdf). *ICML DataPerf Workshop 2022*
 
 This repository is only for intended for scientific purposes. 
 To find label issues in your own classification data, you should instead use the official [cleanlab](https://github.com/cleanlab/cleanlab) library.
